@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Focus Gate settings</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      main {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 40px 16px;
+        display: grid;
+        gap: 20px;
+      }
+      .card {
+        display: grid;
+        gap: 12px;
+      }
+      .card h2 {
+        font-size: 17px;
+      }
+      .card p {
+        margin: 0;
+      }
+      textarea {
+        min-height: 200px;
+        font-family: ui-monospace, Menlo, monospace;
+        font-size: 14px;
+      }
+      .row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .row input[type='number'] {
+        width: 90px;
+      }
+      .row input[type='time'] {
+        width: 130px;
+      }
+      .days label {
+        display: inline-flex;
+        gap: 4px;
+        align-items: center;
+        margin-right: 10px;
+      }
+      .actions {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      #saved {
+        color: var(--work);
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">Focus Gate</p>
+        <h1>Settings</h1>
+      </header>
+
+      <form id="form" class="card" style="gap: 20px; background: none; border: 0; padding: 0">
+        <section class="card">
+          <h2>Sites that go through the gate</h2>
+          <p class="muted">One per line. Subdomains are included, so <code>youtube.com</code> also covers <code>m.youtube.com</code>.</p>
+          <textarea id="sites" spellcheck="false"></textarea>
+        </section>
+
+        <section class="card">
+          <h2>Daily personal allowance</h2>
+          <div class="row">
+            <input id="limit" type="number" min="0" max="600" required />
+            <span>minutes a day of non-work social media</span>
+          </div>
+          <div class="row">
+            <input id="pause" type="number" min="0" max="60" required />
+            <span>seconds to wait on the gate before you can continue</span>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Work hours</h2>
+          <label class="row"><input id="wh-enabled" type="checkbox" /> I have set work hours</label>
+          <div class="row">
+            <input id="wh-start" type="time" required /> <span>to</span>
+            <input id="wh-end" type="time" required />
+          </div>
+          <div class="days" id="wh-days"></div>
+          <label class="row">
+            <input id="block-personal" type="checkbox" /> Only allow work sessions during work hours
+          </label>
+        </section>
+
+        <div class="actions">
+          <button type="submit" class="primary-work">Save settings</button>
+          <span id="saved" hidden>Saved</span>
+          <p id="error" class="error"></p>
+        </div>
+      </form>
+    </main>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Focus Gate</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        width: 340px;
+      }
+      main {
+        padding: 16px;
+        display: grid;
+        gap: 14px;
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .link {
+        background: none;
+        padding: 0;
+        color: var(--muted);
+        font-weight: 500;
+        text-decoration: underline;
+      }
+      #session {
+        display: grid;
+        gap: 8px;
+        padding: 14px;
+      }
+      #session.work {
+        background: var(--work-soft);
+        border-color: transparent;
+      }
+      #session.personal {
+        background: var(--personal-soft);
+        border-color: transparent;
+      }
+      #session-time {
+        font-size: 28px;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+      }
+      .metric {
+        display: grid;
+        gap: 6px;
+      }
+      .metric-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+      }
+      .week {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+        align-items: end;
+        height: 90px;
+      }
+      .week .col {
+        display: flex;
+        flex-direction: column-reverse;
+        height: 72px;
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--border);
+      }
+      .week .label {
+        text-align: center;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .legend {
+        display: flex;
+        gap: 12px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .legend i {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 3px;
+        margin-right: 4px;
+        vertical-align: -1px;
+      }
+      #log {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 6px;
+        font-size: 13px;
+      }
+      #log li {
+        display: flex;
+        gap: 8px;
+      }
+      #log time {
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+      }
+      h2 {
+        font-size: 13px;
+        color: var(--muted);
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="top">
+        <h1 style="font-size: 17px">Focus Gate</h1>
+        <button id="settings" class="link">Settings</button>
+      </div>
+
+      <section id="session" class="card" hidden>
+        <p class="eyebrow" id="session-label"></p>
+        <div id="session-time"></div>
+        <p id="session-intent" style="margin: 0"></p>
+        <button id="end" class="ghost">End session now</button>
+      </section>
+      <p id="no-session" class="muted" style="margin: 0" hidden>
+        No session running. Social sites will ask why you're there before they open.
+      </p>
+
+      <section class="metric">
+        <div class="metric-row">
+          <span>Personal time</span><span id="personal-text"></span>
+        </div>
+        <div class="bar"><span id="personal-bar" style="background: var(--personal)"></span></div>
+      </section>
+
+      <section class="metric">
+        <div class="metric-row"><span>Work time on social</span><span id="work-text"></span></div>
+        <div class="metric-row"><span>Times you skipped it</span><span id="resisted-text"></span></div>
+      </section>
+
+      <section class="metric">
+        <h2>Last 7 days</h2>
+        <div class="week" id="week"></div>
+        <div class="legend">
+          <span><i style="background: var(--work)"></i>Work</span>
+          <span><i style="background: var(--personal)"></i>Personal</span>
+        </div>
+      </section>
+
+      <section class="metric">
+        <h2>Today's sessions</h2>
+        <ul id="log"></ul>
+      </section>
+    </main>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

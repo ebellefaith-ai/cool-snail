@@ -21,3 +21,7 @@ npm run dev
 npm run build   # type-check + production build
 npm run lint     # oxlint
 ```
+
+## Focus Gate (browser extension)
+
+The [`focus-gate/`](focus-gate/) folder contains a separate Chrome/Edge extension that limits personal social media time and gates every visit behind a "work or personal?" check. See [`focus-gate/README.md`](focus-gate/README.md) for install steps.

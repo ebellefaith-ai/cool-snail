@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pause — Focus Gate</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 48px 16px;
+        display: grid;
+        gap: 20px;
+      }
+      header h1 {
+        font-size: clamp(26px, 4vw, 36px);
+        margin-top: 6px;
+      }
+      #site {
+        color: var(--work);
+      }
+      .notice {
+        margin: 0;
+        padding: 12px 16px;
+        border-radius: 10px;
+        background: var(--personal-soft);
+        color: var(--personal);
+        font-weight: 600;
+      }
+      .stats {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+        font-size: 14px;
+      }
+      .stats strong {
+        display: block;
+        font-size: 20px;
+      }
+      .choices {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+      }
+      .choices .card {
+        display: grid;
+        gap: 14px;
+        align-content: start;
+      }
+      .work h2 {
+        color: var(--work);
+      }
+      .personal h2 {
+        color: var(--personal);
+      }
+      label span {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
+      .card p {
+        margin: 0;
+      }
+      #leave {
+        justify-self: center;
+      }
+      #done {
+        text-align: center;
+        display: grid;
+        gap: 12px;
+        justify-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="gate">
+      <header>
+        <p class="eyebrow">Focus Gate</p>
+        <h1>Why are you opening <span id="site">this site</span>?</h1>
+      </header>
+
+      <p id="reason" class="notice" hidden></p>
+
+      <div class="stats">
+        <div><strong id="stat-personal">–</strong><span class="muted">personal time left today</span></div>
+        <div><strong id="stat-work">–</strong><span class="muted">work time today</span></div>
+        <div><strong id="stat-resisted">–</strong><span class="muted">times you skipped it today</span></div>
+      </div>
+
+      <div class="choices">
+        <section class="card work">
+          <h2>For work</h2>
+          <label>
+            <span>What exactly will you do? Be specific.</span>
+            <input
+              id="intent"
+              type="text"
+              list="recent-intents"
+              maxlength="140"
+              placeholder="e.g. Reply to client DMs, post today's reel"
+              autocomplete="off"
+            />
+            <datalist id="recent-intents"></datalist>
+          </label>
+          <div class="chips" id="work-chips" role="group" aria-label="Work session length"></div>
+          <p id="work-error" class="error"></p>
+          <button id="start-work" class="primary-work">Start work session</button>
+        </section>
+
+        <section class="card personal">
+          <h2>Just browsing</h2>
+          <p id="personal-note" class="muted"></p>
+          <div class="chips" id="personal-chips" role="group" aria-label="Personal session length"></div>
+          <p id="personal-error" class="error"></p>
+          <button id="start-personal" class="primary-personal">Use personal time</button>
+        </section>
+      </div>
+
+      <button id="leave" class="ghost">Never mind, close this tab</button>
+    </main>
+
+    <main id="done" hidden>
+      <p class="eyebrow">Focus Gate</p>
+      <h1>Good call.</h1>
+      <p class="muted" id="done-count"></p>
+      <button id="close" class="ghost">Close tab</button>
+    </main>
+
+    <script type="module" src="gate.js"></script>
+  </body>
+</html>
